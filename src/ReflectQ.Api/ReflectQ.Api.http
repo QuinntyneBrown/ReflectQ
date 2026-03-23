@@ -1,0 +1,13 @@
+@ReflectQ.Api_HostAddress = http://localhost:5087
+
+#if (EnableOpenAPI)
+GET {{ReflectQ.Api_HostAddress}}/openapi/v1.json
+Accept: application/json
+
+###
+#endif
+
+GET {{ReflectQ.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

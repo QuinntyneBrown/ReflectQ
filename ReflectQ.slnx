@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ReflectQ.Api/ReflectQ.Api.csproj" />
+    <Project Path="src/ReflectQ.Domain/ReflectQ.Domain.csproj" />
+    <Project Path="src/ReflectQ.Infrastructure/ReflectQ.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ReflectQ.Api.Tests/ReflectQ.Api.Tests.csproj" />
+  </Folder>
+</Solution>
