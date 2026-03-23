@@ -161,9 +161,18 @@ Current known issue:
 
 - [L1 requirements](docs/specs/L1.md)
 - [L2 requirements](docs/specs/L2.md)
+- [Contributing guide](CONTRIBUTING.md)
 
 ## Near-Term Gaps
 
 - The Angular admin, presenter, and respondent applications have not been built yet.
 - The Angular workspace still contains scaffold-level library components.
 - EF Core migrations are not committed yet.
+
+## Contributing
+
+Contributions are welcome. For local setup, validation commands, and pull request expectations, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
