@@ -8,22 +8,22 @@
   align-items: center;
 }
 
-.stars {
+.star-rating__stars {
   display: flex;
   justify-content: center;
   gap: 12px;
 }
 
-.star {
+.star-rating__star {
   cursor: pointer;
   fill: #B0B0B0;
 }
 
-.star.filled {
+.star-rating__star--filled {
   fill: #16160C;
 }
 
-.label {
+.star-rating__label {
   margin-top: 12px;
   font-family: 'Inconsolata', monospace;
   font-size: 18px;

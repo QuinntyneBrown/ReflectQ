@@ -3,7 +3,7 @@
   width: 100%;
 }
 
-.submit-btn {
+.submit-button {
   width: 100%;
   height: 52px;
   border: none;
@@ -17,7 +17,7 @@
   text-align: center;
 }
 
-.submit-btn.is-disabled {
+.submit-button--disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }

@@ -2,21 +2,21 @@
   display: inline-block;
 }
 
-.logo {
+.app-logo {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.logo.sm {
+.app-logo--sm {
   gap: 8px;
 }
 
-.logo.lg {
+.app-logo--lg {
   gap: 10px;
 }
 
-.logo-box {
+.app-logo__box {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,32 +27,32 @@
   font-weight: 600;
 }
 
-.sm .logo-box {
+.app-logo--sm .app-logo__box {
   width: 28px;
   height: 28px;
   font-size: 16px;
 }
 
-.lg .logo-box {
+.app-logo--lg .app-logo__box {
   width: 36px;
   height: 36px;
   font-size: 20px;
 }
 
-.logo-text {
+.app-logo__text {
   font-family: 'Inconsolata', monospace;
   font-weight: 600;
   color: #0D0D0D;
 }
 
-.logo-text.light {
+.app-logo__text--light {
   color: #FFFFFF;
 }
 
-.sm .logo-text {
+.app-logo--sm .app-logo__text {
   font-size: 16px;
 }
 
-.lg .logo-text {
+.app-logo--lg .app-logo__text {
   font-size: 20px;
 }

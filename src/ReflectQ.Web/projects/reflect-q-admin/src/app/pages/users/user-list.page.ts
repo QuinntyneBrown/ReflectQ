@@ -9,10 +9,10 @@ import { User, UserRole } from 'domain';
   imports: [FormsModule, DatePipe],
   template: `
     <div class="user-list" data-testid="user-list-page">
-      <header class="page-header">
-        <h1 class="page-title">Users</h1>
+      <header class="user-list__header">
+        <h1 class="user-list__title">Users</h1>
         <button
-          class="btn btn-primary"
+          class="btn btn--primary"
           (click)="showInviteForm.set(!showInviteForm())"
           data-testid="invite-user-button"
         >
@@ -21,16 +21,16 @@ import { User, UserRole } from 'domain';
       </header>
 
       @if (showInviteForm()) {
-        <div class="invite-form" data-testid="invite-form">
+        <div class="user-list__invite-form" data-testid="invite-form">
           <input
             type="email"
-            class="form-input"
+            class="form-group__input"
             placeholder="Email address"
             [(ngModel)]="inviteEmail"
             data-testid="invite-email-input"
           />
           <select
-            class="form-select"
+            class="form-group__select"
             [(ngModel)]="inviteRole"
             data-testid="invite-role-select"
             aria-label="Select role"
@@ -38,14 +38,14 @@ import { User, UserRole } from 'domain';
             <option value="Viewer">Viewer</option>
             <option value="Admin">Admin</option>
           </select>
-          <button class="btn btn-primary" (click)="onInvite()" data-testid="send-invite-button">
+          <button class="btn btn--primary" (click)="onInvite()" data-testid="send-invite-button">
             Send Invite
           </button>
-          <button class="btn btn-secondary" (click)="showInviteForm.set(false)">Cancel</button>
+          <button class="btn btn--secondary" (click)="showInviteForm.set(false)">Cancel</button>
         </div>
       }
 
-      <div class="table-container">
+      <div class="user-list__table-wrap">
         <table class="data-table" data-testid="users-table">
           <thead>
             <tr>
@@ -64,7 +64,7 @@ import { User, UserRole } from 'domain';
                   @if (editingUserId() === user.id) {
                     <input
                       type="text"
-                      class="inline-input"
+                      class="user-list__inline-input"
                       [(ngModel)]="editName"
                       data-testid="edit-name-input"
                     />
@@ -76,7 +76,7 @@ import { User, UserRole } from 'domain';
                 <td>
                   @if (editingUserId() === user.id) {
                     <select
-                      class="inline-select"
+                      class="user-list__inline-select"
                       [(ngModel)]="editRole"
                       data-testid="edit-role-select"
                       aria-label="Edit role"
@@ -86,19 +86,19 @@ import { User, UserRole } from 'domain';
                       <option value="SuperAdmin">Super Admin</option>
                     </select>
                   } @else {
-                    <span class="badge" [class]="'badge-' + user.role.toLowerCase()">
+                    <span class="badge" [class]="'badge--' + user.role.toLowerCase()">
                       {{ user.role }}
                     </span>
                   }
                 </td>
                 <td>
-                  <span class="badge" [class]="'badge-' + user.status.toLowerCase()">
+                  <span class="badge" [class]="'badge--' + user.status.toLowerCase()">
                     {{ user.status }}
                   </span>
                 </td>
                 <td>{{ user.lastLoginAt ? (user.lastLoginAt | date:'mediumDate') : 'Never' }}</td>
                 <td>
-                  <div class="actions">
+                  <div class="data-table__actions">
                     @if (editingUserId() === user.id) {
                       <button class="icon-btn" title="Save" (click)="onSaveEdit(user)" data-testid="save-edit-button" aria-label="Save changes">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12" /></svg>
@@ -124,7 +124,7 @@ import { User, UserRole } from 'domain';
               </tr>
             } @empty {
               <tr>
-                <td colspan="6" class="empty-cell">No users found.</td>
+                <td colspan="6" class="data-table__empty">No users found.</td>
               </tr>
             }
           </tbody>
@@ -137,14 +137,14 @@ import { User, UserRole } from 'domain';
       display: block;
     }
 
-    .page-header {
+    .user-list__header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 24px;
     }
 
-    .page-title {
+    .user-list__title {
       font-family: 'Inconsolata', monospace;
       font-size: 24px;
       font-weight: 600;
@@ -162,22 +162,22 @@ import { User, UserRole } from 'domain';
       border: none;
     }
 
-    .btn-primary {
+    .btn--primary {
       background: #16160C;
       color: #ffffff;
     }
 
-    .btn-primary:hover {
+    .btn--primary:hover {
       opacity: 0.9;
     }
 
-    .btn-secondary {
+    .btn--secondary {
       background: #ffffff;
       color: #16160C;
       border: 1px solid #16160C1A;
     }
 
-    .invite-form {
+    .user-list__invite-form {
       display: flex;
       align-items: center;
       gap: 12px;
@@ -188,8 +188,8 @@ import { User, UserRole } from 'domain';
       border: 1px solid #16160C1A;
     }
 
-    .form-input,
-    .form-select {
+    .form-group__input,
+    .form-group__select {
       height: 40px;
       padding: 0 14px;
       border: 1px solid #16160C1A;
@@ -200,17 +200,17 @@ import { User, UserRole } from 'domain';
       background: #ffffff;
     }
 
-    .form-input {
+    .form-group__input {
       flex: 1;
     }
 
-    .form-input:focus,
-    .form-select:focus {
+    .form-group__input:focus,
+    .form-group__select:focus {
       outline: none;
       border-color: #16160C;
     }
 
-    .table-container {
+    .user-list__table-wrap {
       background: #ffffff;
       border-radius: 12px;
       border: 1px solid #16160C1A;
@@ -254,14 +254,14 @@ import { User, UserRole } from 'domain';
       font-weight: 600;
     }
 
-    .badge-viewer { background: #F5F0F0; color: #7A7A7A; }
-    .badge-admin { background: #C4956A33; color: #9A6F41; }
-    .badge-superadmin { background: #16160C; color: #ffffff; }
-    .badge-active { background: #4A7C59; color: #ffffff; }
-    .badge-deactivated { background: #16160C1A; color: #7A7A7A; }
+    .badge--viewer { background: #F5F0F0; color: #7A7A7A; }
+    .badge--admin { background: #C4956A33; color: #9A6F41; }
+    .badge--superadmin { background: #16160C; color: #ffffff; }
+    .badge--active { background: #4A7C59; color: #ffffff; }
+    .badge--deactivated { background: #16160C1A; color: #7A7A7A; }
 
-    .inline-input,
-    .inline-select {
+    .user-list__inline-input,
+    .user-list__inline-select {
       height: 32px;
       padding: 0 8px;
       border: 1px solid #16160C1A;
@@ -270,7 +270,7 @@ import { User, UserRole } from 'domain';
       font-size: 13px;
     }
 
-    .actions {
+    .data-table__actions {
       display: flex;
       gap: 8px;
     }
@@ -292,7 +292,7 @@ import { User, UserRole } from 'domain';
       background: #F5F0F0;
     }
 
-    .empty-cell {
+    .data-table__empty {
       text-align: center;
       color: #7A7A7A;
       padding: 32px 16px !important;

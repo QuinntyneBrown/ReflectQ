@@ -1,9 +1,9 @@
 <div class="star-rating">
-  <div class="stars">
+  <div class="star-rating__stars">
     @for (star of stars; track star) {
       <svg
-        class="star"
-        [class.filled]="star < value"
+        class="star-rating__star"
+        [class.star-rating__star--filled]="star < value"
         (click)="ratingChange.emit(star + 1)"
         width="44"
         height="44"
@@ -15,5 +15,5 @@
       </svg>
     }
   </div>
-  <span class="label">{{ value }} out of 5</span>
+  <span class="star-rating__label">{{ value }} out of 5</span>
 </div>

@@ -2,14 +2,14 @@
   display: block;
 }
 
-.confirmation {
+.confirmation-message {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 32px;
 }
 
-.check-circle {
+.confirmation-message__icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,7 +19,7 @@
   background: #4CAF50;
 }
 
-.title {
+.confirmation-message__title {
   margin: 0;
   font-family: 'Inconsolata', monospace;
   font-size: 28px;
@@ -28,7 +28,7 @@
   text-align: center;
 }
 
-.description {
+.confirmation-message__description {
   margin: 0;
   font-family: 'DM Sans', sans-serif;
   font-size: 16px;
@@ -39,7 +39,7 @@
   white-space: pre-line;
 }
 
-.note {
+.confirmation-message__note {
   margin: 0;
   font-family: 'DM Sans', sans-serif;
   font-size: 14px;

@@ -17,12 +17,12 @@
   box-sizing: border-box;
 }
 
-.option-card.selected {
+.option-card--selected {
   background: #16160C;
   border: 1px solid #16160C;
 }
 
-.radio {
+.option-card__radio {
   display: inline-block;
   width: 20px;
   height: 20px;
@@ -33,18 +33,18 @@
   box-sizing: border-box;
 }
 
-.selected .radio {
+.option-card--selected .option-card__radio {
   border-color: #FFFFFF;
   background: #FFFFFF;
 }
 
-.text {
+.option-card__text {
   font-family: 'DM Sans', sans-serif;
   font-size: 15px;
   color: #0D0D0D;
 }
 
-.selected .text {
+.option-card--selected .option-card__text {
   color: #FFFFFF;
   font-weight: 500;
 }

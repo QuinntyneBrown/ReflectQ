@@ -10,24 +10,24 @@ import { Question, QuestionStatus } from 'domain';
   imports: [FormsModule, DatePipe],
   template: `
     <div class="question-list" data-testid="question-list-page">
-      <header class="page-header">
-        <h1 class="page-title">Questions</h1>
-        <button class="btn btn-primary" (click)="onNewQuestion()" data-testid="new-question-button">
+      <header class="question-list__header">
+        <h1 class="question-list__title">Questions</h1>
+        <button class="btn btn--primary" (click)="onNewQuestion()" data-testid="new-question-button">
           New Question
         </button>
       </header>
 
-      <div class="filters">
+      <div class="question-list__filters">
         <input
           type="text"
-          class="search-input"
+          class="question-list__search"
           placeholder="Search questions..."
           [ngModel]="search()"
           (ngModelChange)="onSearchChange($event)"
           data-testid="search-input"
         />
         <select
-          class="filter-select"
+          class="question-list__filter"
           [ngModel]="statusFilter()"
           (ngModelChange)="onStatusFilterChange($event)"
           data-testid="status-filter"
@@ -38,7 +38,7 @@ import { Question, QuestionStatus } from 'domain';
           <option value="Active">Active</option>
           <option value="Archived">Archived</option>
         </select>
-        <label class="toggle-label">
+        <label class="question-list__toggle">
           <input
             type="checkbox"
             [ngModel]="showArchived()"
@@ -49,7 +49,7 @@ import { Question, QuestionStatus } from 'domain';
         </label>
       </div>
 
-      <div class="table-container">
+      <div class="question-list__table-wrap">
         <table class="data-table" data-testid="questions-table">
           <thead>
             <tr>
@@ -66,13 +66,13 @@ import { Question, QuestionStatus } from 'domain';
                 <td>{{ question.title }}</td>
                 <td>{{ question.type }}</td>
                 <td>
-                  <span class="badge" [class]="'badge-' + question.status.toLowerCase()">
+                  <span class="badge" [class]="'badge--' + question.status.toLowerCase()">
                     {{ question.status }}
                   </span>
                 </td>
                 <td>{{ question.createdAt | date:'mediumDate' }}</td>
                 <td>
-                  <div class="actions">
+                  <div class="data-table__actions">
                     @if (question.status !== 'Active') {
                       <button
                         class="icon-btn"
@@ -103,7 +103,7 @@ import { Question, QuestionStatus } from 'domain';
               </tr>
             } @empty {
               <tr>
-                <td colspan="5" class="empty-cell">No questions found.</td>
+                <td colspan="5" class="data-table__empty">No questions found.</td>
               </tr>
             }
           </tbody>
@@ -116,14 +116,14 @@ import { Question, QuestionStatus } from 'domain';
       display: block;
     }
 
-    .page-header {
+    .question-list__header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 24px;
     }
 
-    .page-title {
+    .question-list__title {
       font-family: 'Inconsolata', monospace;
       font-size: 24px;
       font-weight: 600;
@@ -141,23 +141,23 @@ import { Question, QuestionStatus } from 'domain';
       border: none;
     }
 
-    .btn-primary {
+    .btn--primary {
       background: #16160C;
       color: #ffffff;
     }
 
-    .btn-primary:hover {
+    .btn--primary:hover {
       opacity: 0.9;
     }
 
-    .filters {
+    .question-list__filters {
       display: flex;
       align-items: center;
       gap: 12px;
       margin-bottom: 20px;
     }
 
-    .search-input {
+    .question-list__search {
       flex: 1;
       height: 40px;
       padding: 0 14px;
@@ -169,12 +169,12 @@ import { Question, QuestionStatus } from 'domain';
       color: #16160C;
     }
 
-    .search-input:focus {
+    .question-list__search:focus {
       outline: none;
       border-color: #16160C;
     }
 
-    .filter-select {
+    .question-list__filter {
       height: 40px;
       padding: 0 14px;
       border: 1px solid #16160C1A;
@@ -186,7 +186,7 @@ import { Question, QuestionStatus } from 'domain';
       cursor: pointer;
     }
 
-    .toggle-label {
+    .question-list__toggle {
       display: flex;
       align-items: center;
       gap: 6px;
@@ -197,7 +197,7 @@ import { Question, QuestionStatus } from 'domain';
       white-space: nowrap;
     }
 
-    .table-container {
+    .question-list__table-wrap {
       background: #ffffff;
       border-radius: 12px;
       border: 1px solid #16160C1A;
@@ -241,22 +241,22 @@ import { Question, QuestionStatus } from 'domain';
       font-weight: 600;
     }
 
-    .badge-draft {
+    .badge--draft {
       background: #F5F0F0;
       color: #7A7A7A;
     }
 
-    .badge-active {
+    .badge--active {
       background: #4A7C59;
       color: #ffffff;
     }
 
-    .badge-archived {
+    .badge--archived {
       background: #16160C1A;
       color: #16160C;
     }
 
-    .actions {
+    .data-table__actions {
       display: flex;
       gap: 8px;
     }
@@ -278,7 +278,7 @@ import { Question, QuestionStatus } from 'domain';
       background: #F5F0F0;
     }
 
-    .empty-cell {
+    .data-table__empty {
       text-align: center;
       color: #7A7A7A;
       padding: 32px 16px !important;

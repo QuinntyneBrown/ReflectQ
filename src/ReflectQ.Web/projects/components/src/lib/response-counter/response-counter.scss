@@ -2,14 +2,14 @@
   display: inline-block;
 }
 
-.counter-container {
+.response-counter {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   gap: 16px;
 }
 
-.count {
+.response-counter__count {
   font-family: 'Inconsolata', monospace;
   font-size: 72px;
   font-weight: 600;
@@ -18,26 +18,26 @@
   line-height: 1;
 }
 
-.labels {
+.response-counter__labels {
   display: flex;
   flex-direction: column;
   gap: 4px;
   padding-bottom: 8px;
 }
 
-.responses-label {
+.response-counter__label {
   font-family: 'DM Sans', sans-serif;
   font-size: 16px;
   color: rgba(255, 255, 255, 0.5);
 }
 
-.live-indicator {
+.response-counter__live {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.live-dot {
+.response-counter__dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -46,7 +46,7 @@
   animation: pulse 2s ease-in-out infinite;
 }
 
-.live-text {
+.response-counter__live-text {
   font-family: 'DM Sans', sans-serif;
   font-size: 12px;
   color: rgba(255, 255, 255, 0.5);

@@ -10,16 +10,16 @@ import { Question, QuestionType } from 'domain';
   template: `
     <div class="respondent" data-testid="respondent-page">
       @if (question(); as q) {
-        <div class="respondent-content">
-          <div class="top-section">
+        <div class="respondent__content">
+          <div class="respondent__top">
             <lib-app-logo size="sm" theme="dark" />
             <lib-question-text [text]="q.title" />
           </div>
 
-          <div class="input-section">
+          <div class="respondent__input">
             @switch (q.type) {
               @case ('MultipleChoice') {
-                <div class="options" data-testid="options-list">
+                <div class="respondent__options" data-testid="options-list">
                   @for (option of q.options; track option.id) {
                     <lib-option-card
                       [text]="option.text"
@@ -46,7 +46,7 @@ import { Question, QuestionType } from 'domain';
             }
           </div>
 
-          <div class="bottom-section">
+          <div class="respondent__bottom">
             <lib-submit-button
               [disabled]="!canSubmit()"
               (submitClick)="onSubmit()"
@@ -55,7 +55,7 @@ import { Question, QuestionType } from 'domain';
           </div>
         </div>
       } @else {
-        <div class="loading">
+        <div class="respondent--loading">
           <p>Loading...</p>
         </div>
       }
@@ -74,7 +74,7 @@ import { Question, QuestionType } from 'domain';
       justify-content: center;
     }
 
-    .respondent-content {
+    .respondent__content {
       width: 100%;
       max-width: 480px;
       padding: 32px 24px;
@@ -83,28 +83,28 @@ import { Question, QuestionType } from 'domain';
       min-height: 100%;
     }
 
-    .top-section {
+    .respondent__top {
       display: flex;
       flex-direction: column;
       gap: 24px;
       margin-bottom: 32px;
     }
 
-    .input-section {
+    .respondent__input {
       flex: 1;
     }
 
-    .options {
+    .respondent__options {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
 
-    .bottom-section {
+    .respondent__bottom {
       padding-top: 24px;
     }
 
-    .loading {
+    .respondent--loading {
       display: flex;
       align-items: center;
       justify-content: center;

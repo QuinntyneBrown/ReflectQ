@@ -2,7 +2,7 @@
   display: inline-block;
 }
 
-.fullscreen-btn {
+.full-screen-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,11 +17,11 @@
   transition: border-color 0.2s ease;
 }
 
-.fullscreen-btn:hover {
+.full-screen-button:hover {
   border-color: rgba(255, 255, 255, 0.4);
 }
 
-.fullscreen-btn span {
+.full-screen-button__text {
   font-family: 'Inconsolata', monospace;
   font-size: 13px;
   font-weight: 500;

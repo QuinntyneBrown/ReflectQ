@@ -7,19 +7,19 @@ import { AuthService } from '../../auth/auth.service';
   selector: 'app-sign-in-page',
   imports: [AppLogo],
   template: `
-    <div class="sign-in-layout" data-testid="sign-in-page">
-      <div class="left-panel">
-        <div class="left-content">
+    <div class="sign-in" data-testid="sign-in-page">
+      <div class="sign-in__left">
+        <div class="sign-in__left-content">
           <lib-app-logo size="lg" theme="dark" />
-          <p class="tagline">Real-time audience engagement for meaningful conversations.</p>
-          <button class="sign-in-btn" (click)="onSignIn()" data-testid="sign-in-button">
+          <p class="sign-in__tagline">Real-time audience engagement for meaningful conversations.</p>
+          <button class="sign-in__button" (click)="onSignIn()" data-testid="sign-in-button">
             Sign In
           </button>
         </div>
       </div>
-      <div class="right-panel">
-        <div class="right-content">
-          <h1 class="hero-text">Empower your<br />community with<br />thoughtful questions.</h1>
+      <div class="sign-in__right">
+        <div class="sign-in__right-content">
+          <h1 class="sign-in__hero-text">Empower your<br />community with<br />thoughtful questions.</h1>
         </div>
       </div>
     </div>
@@ -30,12 +30,12 @@ import { AuthService } from '../../auth/auth.service';
       height: 100vh;
     }
 
-    .sign-in-layout {
+    .sign-in {
       display: flex;
       height: 100%;
     }
 
-    .left-panel {
+    .sign-in__left {
       flex: 1;
       background: #F5F0F0;
       display: flex;
@@ -43,7 +43,7 @@ import { AuthService } from '../../auth/auth.service';
       justify-content: center;
     }
 
-    .left-content {
+    .sign-in__left-content {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -51,7 +51,7 @@ import { AuthService } from '../../auth/auth.service';
       max-width: 320px;
     }
 
-    .tagline {
+    .sign-in__tagline {
       font-family: 'DM Sans', sans-serif;
       font-size: 16px;
       color: #7A7A7A;
@@ -59,7 +59,7 @@ import { AuthService } from '../../auth/auth.service';
       margin: 0;
     }
 
-    .sign-in-btn {
+    .sign-in__button {
       height: 48px;
       padding: 0 32px;
       background: #16160C;
@@ -73,11 +73,11 @@ import { AuthService } from '../../auth/auth.service';
       transition: opacity 0.15s ease;
     }
 
-    .sign-in-btn:hover {
+    .sign-in__button:hover {
       opacity: 0.9;
     }
 
-    .right-panel {
+    .sign-in__right {
       flex: 1;
       background: #16160C;
       display: flex;
@@ -85,12 +85,12 @@ import { AuthService } from '../../auth/auth.service';
       justify-content: center;
     }
 
-    .right-content {
+    .sign-in__right-content {
       max-width: 400px;
       padding: 40px;
     }
 
-    .hero-text {
+    .sign-in__hero-text {
       font-family: 'Inconsolata', monospace;
       font-size: 36px;
       font-weight: 600;

@@ -7,17 +7,17 @@ import { AuthService } from '../auth/auth.service';
   selector: 'app-admin-layout',
   imports: [RouterOutlet, RouterLink, RouterLinkActive, AppLogo],
   template: `
-    <div class="layout" data-testid="admin-layout">
-      <aside class="sidebar" role="navigation" aria-label="Main navigation">
-        <div class="sidebar-top">
-          <div class="logo-wrapper">
+    <div class="admin-layout" data-testid="admin-layout">
+      <aside class="admin-layout__sidebar" role="navigation" aria-label="Main navigation">
+        <div class="admin-layout__sidebar-top">
+          <div class="admin-layout__logo">
             <lib-app-logo size="sm" theme="dark" />
           </div>
-          <nav class="nav">
+          <nav class="admin-layout__nav">
             <a
-              class="nav-item"
+              class="admin-layout__nav-item"
               routerLink="/dashboard"
-              routerLinkActive="active"
+              [routerLinkActive]="'admin-layout__nav-item--active'"
               data-testid="nav-dashboard"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -27,9 +27,9 @@ import { AuthService } from '../auth/auth.service';
               <span>Dashboard</span>
             </a>
             <a
-              class="nav-item"
+              class="admin-layout__nav-item"
               routerLink="/questions"
-              routerLinkActive="active"
+              [routerLinkActive]="'admin-layout__nav-item--active'"
               data-testid="nav-questions"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -43,9 +43,9 @@ import { AuthService } from '../auth/auth.service';
               <span>Questions</span>
             </a>
             <a
-              class="nav-item"
+              class="admin-layout__nav-item"
               routerLink="/users"
-              routerLinkActive="active"
+              [routerLinkActive]="'admin-layout__nav-item--active'"
               data-testid="nav-users"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -58,13 +58,13 @@ import { AuthService } from '../auth/auth.service';
             </a>
           </nav>
         </div>
-        <div class="sidebar-bottom">
-          <button class="sign-out-btn" (click)="onSignOut()" data-testid="sign-out-button">
+        <div class="admin-layout__sidebar-bottom">
+          <button class="admin-layout__sign-out" (click)="onSignOut()" data-testid="sign-out-button">
             Sign Out
           </button>
         </div>
       </aside>
-      <main class="content">
+      <main class="admin-layout__content">
         <router-outlet />
       </main>
     </div>
@@ -75,12 +75,12 @@ import { AuthService } from '../auth/auth.service';
       height: 100%;
     }
 
-    .layout {
+    .admin-layout {
       display: flex;
       height: 100vh;
     }
 
-    .sidebar {
+    .admin-layout__sidebar {
       width: 240px;
       min-width: 240px;
       background: #ffffff;
@@ -90,23 +90,23 @@ import { AuthService } from '../auth/auth.service';
       justify-content: space-between;
     }
 
-    .sidebar-top {
+    .admin-layout__sidebar-top {
       display: flex;
       flex-direction: column;
     }
 
-    .logo-wrapper {
+    .admin-layout__logo {
       padding: 20px 20px 24px;
     }
 
-    .nav {
+    .admin-layout__nav {
       display: flex;
       flex-direction: column;
       gap: 2px;
       padding: 0 8px;
     }
 
-    .nav-item {
+    .admin-layout__nav-item {
       display: flex;
       align-items: center;
       gap: 12px;
@@ -120,20 +120,20 @@ import { AuthService } from '../auth/auth.service';
       transition: background-color 0.15s ease;
     }
 
-    .nav-item:hover {
+    .admin-layout__nav-item:hover {
       background-color: #F5F0F0;
     }
 
-    .nav-item.active {
+    .admin-layout__nav-item--active {
       background-color: #F5F0F0;
     }
 
-    .sidebar-bottom {
+    .admin-layout__sidebar-bottom {
       padding: 16px 20px;
       border-top: 1px solid #16160C1A;
     }
 
-    .sign-out-btn {
+    .admin-layout__sign-out {
       background: none;
       border: none;
       color: #16160C;
@@ -144,11 +144,11 @@ import { AuthService } from '../auth/auth.service';
       opacity: 0.6;
     }
 
-    .sign-out-btn:hover {
+    .admin-layout__sign-out:hover {
       opacity: 1;
     }
 
-    .content {
+    .admin-layout__content {
       flex: 1;
       overflow-y: auto;
       padding: 32px;

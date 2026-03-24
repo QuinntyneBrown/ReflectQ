@@ -5,7 +5,7 @@ import { ConfirmationMessage } from 'components';
   selector: 'app-confirmation-page',
   imports: [ConfirmationMessage],
   template: `
-    <div class="confirmation-wrapper" data-testid="confirmation-page">
+    <div class="confirmation" data-testid="confirmation-page">
       <lib-confirmation-message />
     </div>
   `,
@@ -15,7 +15,7 @@ import { ConfirmationMessage } from 'components';
       height: 100vh;
     }
 
-    .confirmation-wrapper {
+    .confirmation {
       height: 100%;
       display: flex;
       align-items: center;

@@ -1,10 +1,10 @@
-<div class="field">
+<div class="text-area-field">
   <textarea
-    class="textarea"
+    class="text-area-field__input"
     [placeholder]="placeholder"
     [maxLength]="maxLength"
     [value]="value"
     (input)="onInput($event)"
   ></textarea>
-  <span class="char-count">{{ value.length }} / {{ maxLength }} characters</span>
+  <span class="text-area-field__count">{{ value.length }} / {{ maxLength }} characters</span>
 </div>

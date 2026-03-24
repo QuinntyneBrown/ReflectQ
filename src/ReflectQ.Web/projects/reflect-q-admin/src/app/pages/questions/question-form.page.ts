@@ -9,31 +9,31 @@ import { QuestionType } from 'domain';
   imports: [ReactiveFormsModule],
   template: `
     <div class="question-form" data-testid="question-form-page">
-      <header class="page-header">
-        <h1 class="page-title">{{ isEditMode() ? 'Edit Question' : 'Create Question' }}</h1>
+      <header class="question-form__header">
+        <h1 class="question-form__title">{{ isEditMode() ? 'Edit Question' : 'Create Question' }}</h1>
       </header>
 
-      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-card">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="question-form__card">
         <div class="form-group">
-          <label for="title" class="form-label">Title</label>
+          <label for="title" class="form-group__label">Title</label>
           <input
             id="title"
             type="text"
-            class="form-input"
+            class="form-group__input"
             formControlName="title"
             placeholder="Enter question title"
             data-testid="title-input"
           />
           @if (form.controls.title.invalid && form.controls.title.touched) {
-            <span class="form-error">Title is required.</span>
+            <span class="form-group__error">Title is required.</span>
           }
         </div>
 
         <div class="form-group">
-          <label for="body" class="form-label">Body</label>
+          <label for="body" class="form-group__label">Body</label>
           <textarea
             id="body"
-            class="form-textarea"
+            class="form-group__textarea"
             formControlName="body"
             placeholder="Optional additional details"
             rows="3"
@@ -42,10 +42,10 @@ import { QuestionType } from 'domain';
         </div>
 
         <div class="form-group">
-          <label for="type" class="form-label">Type</label>
+          <label for="type" class="form-group__label">Type</label>
           <select
             id="type"
-            class="form-select"
+            class="form-group__select"
             formControlName="type"
             data-testid="type-select"
           >
@@ -57,20 +57,20 @@ import { QuestionType } from 'domain';
 
         @if (form.controls.type.value === 'MultipleChoice') {
           <div class="form-group" data-testid="options-section">
-            <label class="form-label">Answer Options</label>
-            <div class="options-list" formArrayName="options">
+            <label class="form-group__label">Answer Options</label>
+            <div class="question-form__options" formArrayName="options">
               @for (option of optionsArray.controls; track option; let i = $index) {
-                <div class="option-row" [formGroupName]="i">
+                <div class="question-form__option-row" [formGroupName]="i">
                   <input
                     type="text"
-                    class="form-input option-input"
+                    class="form-group__input question-form__option-input"
                     formControlName="text"
                     [placeholder]="'Option ' + (i + 1)"
                     [attr.data-testid]="'option-input-' + i"
                   />
                   <button
                     type="button"
-                    class="icon-btn remove-btn"
+                    class="icon-btn question-form__remove-btn"
                     (click)="removeOption(i)"
                     [attr.data-testid]="'remove-option-' + i"
                     aria-label="Remove option"
@@ -84,7 +84,7 @@ import { QuestionType } from 'domain';
             </div>
             <button
               type="button"
-              class="btn btn-secondary add-option-btn"
+              class="btn btn--secondary question-form__add-btn"
               (click)="addOption()"
               data-testid="add-option-button"
             >
@@ -93,13 +93,13 @@ import { QuestionType } from 'domain';
           </div>
         }
 
-        <div class="form-actions">
-          <button type="button" class="btn btn-secondary" (click)="onCancel()" data-testid="cancel-button">
+        <div class="question-form__actions">
+          <button type="button" class="btn btn--secondary" (click)="onCancel()" data-testid="cancel-button">
             Cancel
           </button>
           <button
             type="submit"
-            class="btn btn-primary"
+            class="btn btn--primary"
             [disabled]="form.invalid"
             data-testid="save-button"
           >
@@ -114,18 +114,18 @@ import { QuestionType } from 'domain';
       display: block;
     }
 
-    .page-header {
+    .question-form__header {
       margin-bottom: 24px;
     }
 
-    .page-title {
+    .question-form__title {
       font-family: 'Inconsolata', monospace;
       font-size: 24px;
       font-weight: 600;
       margin: 0;
     }
 
-    .form-card {
+    .question-form__card {
       background: #ffffff;
       border-radius: 12px;
       padding: 24px;
@@ -137,7 +137,7 @@ import { QuestionType } from 'domain';
       margin-bottom: 20px;
     }
 
-    .form-label {
+    .form-group__label {
       display: block;
       margin-bottom: 6px;
       font-family: 'DM Sans', sans-serif;
@@ -146,9 +146,9 @@ import { QuestionType } from 'domain';
       color: #16160C;
     }
 
-    .form-input,
-    .form-textarea,
-    .form-select {
+    .form-group__input,
+    .form-group__textarea,
+    .form-group__select {
       width: 100%;
       padding: 10px 14px;
       border: 1px solid #16160C1A;
@@ -159,18 +159,18 @@ import { QuestionType } from 'domain';
       background: #ffffff;
     }
 
-    .form-input:focus,
-    .form-textarea:focus,
-    .form-select:focus {
+    .form-group__input:focus,
+    .form-group__textarea:focus,
+    .form-group__select:focus {
       outline: none;
       border-color: #16160C;
     }
 
-    .form-textarea {
+    .form-group__textarea {
       resize: vertical;
     }
 
-    .form-error {
+    .form-group__error {
       display: block;
       margin-top: 4px;
       font-family: 'DM Sans', sans-serif;
@@ -178,19 +178,19 @@ import { QuestionType } from 'domain';
       color: #d32f2f;
     }
 
-    .options-list {
+    .question-form__options {
       display: flex;
       flex-direction: column;
       gap: 8px;
       margin-bottom: 8px;
     }
 
-    .option-row {
+    .question-form__option-row {
       display: flex;
       gap: 8px;
     }
 
-    .option-input {
+    .question-form__option-input {
       flex: 1;
     }
 
@@ -211,12 +211,12 @@ import { QuestionType } from 'domain';
       background: #F5F0F0;
     }
 
-    .add-option-btn {
+    .question-form__add-btn {
       height: 36px;
       font-size: 13px;
     }
 
-    .form-actions {
+    .question-form__actions {
       display: flex;
       gap: 12px;
       justify-content: flex-end;
@@ -241,12 +241,12 @@ import { QuestionType } from 'domain';
       cursor: not-allowed;
     }
 
-    .btn-primary {
+    .btn--primary {
       background: #16160C;
       color: #ffffff;
     }
 
-    .btn-secondary {
+    .btn--secondary {
       background: #ffffff;
       color: #16160C;
       border: 1px solid #16160C1A;

@@ -10,25 +10,25 @@ import { Question } from 'domain';
   imports: [AppLogo, QrCodeFrame, ResponseCounter, FullScreenButton],
   template: `
     <div class="presenter" data-testid="presenter-page">
-      <header class="presenter-header">
+      <header class="presenter__header">
         <lib-app-logo size="lg" theme="light" />
         <lib-full-screen-button (toggle)="onToggleFullScreen()" />
       </header>
 
       @if (question(); as q) {
-        <div class="presenter-content">
-          <h1 class="question-title">{{ q.title }}</h1>
+        <div class="presenter__content">
+          <h1 class="presenter__question">{{ q.title }}</h1>
 
-          <div class="presenter-info">
+          <div class="presenter__info">
             <lib-qr-code-frame [width]="320" [height]="320">
-              <p class="qr-placeholder">Scan to respond</p>
+              <p class="presenter__qr-placeholder">Scan to respond</p>
             </lib-qr-code-frame>
 
             <lib-response-counter [count]="responseCount()" />
           </div>
         </div>
       } @else {
-        <div class="loading">
+        <div class="presenter--loading">
           <p>Loading question...</p>
         </div>
       }
@@ -48,13 +48,13 @@ import { Question } from 'domain';
       padding: 32px 48px;
     }
 
-    .presenter-header {
+    .presenter__header {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .presenter-content {
+    .presenter__content {
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -63,7 +63,7 @@ import { Question } from 'domain';
       gap: 48px;
     }
 
-    .question-title {
+    .presenter__question {
       font-family: 'Inconsolata', monospace;
       font-size: 32px;
       font-weight: 600;
@@ -73,13 +73,13 @@ import { Question } from 'domain';
       max-width: 700px;
     }
 
-    .presenter-info {
+    .presenter__info {
       display: flex;
       align-items: center;
       gap: 64px;
     }
 
-    .qr-placeholder {
+    .presenter__qr-placeholder {
       font-family: 'DM Sans', sans-serif;
       font-size: 14px;
       color: #7A7A7A;
@@ -87,7 +87,7 @@ import { Question } from 'domain';
       margin: 0;
     }
 
-    .loading {
+    .presenter--loading {
       flex: 1;
       display: flex;
       align-items: center;

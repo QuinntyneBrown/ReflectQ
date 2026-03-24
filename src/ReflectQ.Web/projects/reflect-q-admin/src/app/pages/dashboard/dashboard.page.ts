@@ -10,11 +10,11 @@ import { Question, QuestionResponse, QuestionStatus } from 'domain';
   imports: [DatePipe],
   template: `
     <div class="dashboard" data-testid="dashboard-page">
-      <header class="page-header">
-        <h1 class="page-title">Live Dashboard</h1>
-        <div class="header-actions">
+      <header class="dashboard__header">
+        <h1 class="dashboard__title">Live Dashboard</h1>
+        <div class="dashboard__actions">
           <button
-            class="btn btn-secondary"
+            class="btn btn--secondary"
             (click)="onExportCsv()"
             [disabled]="!activeQuestion()"
             data-testid="export-csv-button"
@@ -22,7 +22,7 @@ import { Question, QuestionResponse, QuestionStatus } from 'domain';
             Export CSV
           </button>
           <button
-            class="btn btn-secondary"
+            class="btn btn--secondary"
             (click)="onReset()"
             [disabled]="!activeQuestion()"
             data-testid="reset-button"
@@ -33,16 +33,16 @@ import { Question, QuestionResponse, QuestionStatus } from 'domain';
       </header>
 
       @if (activeQuestion(); as question) {
-        <div class="active-question-card" data-testid="active-question-card">
-          <div class="card-header">
-            <span class="badge badge-active">Active</span>
-            <span class="question-type">{{ question.type }}</span>
+        <div class="dashboard__question-card" data-testid="active-question-card">
+          <div class="dashboard__card-header">
+            <span class="badge badge--active">Active</span>
+            <span class="dashboard__question-type">{{ question.type }}</span>
           </div>
-          <h2 class="question-title">{{ question.title }}</h2>
-          <div class="card-footer">
-            <span class="response-count">{{ responseCount() }} responses</span>
+          <h2 class="dashboard__question-title">{{ question.title }}</h2>
+          <div class="dashboard__card-footer">
+            <span class="dashboard__response-count">{{ responseCount() }} responses</span>
             <button
-              class="btn btn-primary"
+              class="btn btn--primary"
               (click)="onPresenterView(question.id)"
               data-testid="presenter-view-button"
             >
@@ -51,37 +51,37 @@ import { Question, QuestionResponse, QuestionStatus } from 'domain';
           </div>
         </div>
 
-        <div class="dashboard-grid">
-          <div class="chart-section" data-testid="chart-section">
-            <h3 class="section-title">Response Distribution</h3>
+        <div class="dashboard__grid">
+          <div class="dashboard__chart" data-testid="chart-section">
+            <h3 class="dashboard__section-title">Response Distribution</h3>
             <div class="bar-chart">
               @for (entry of chartData(); track entry.label) {
-                <div class="bar-row">
-                  <span class="bar-label">{{ entry.label }}</span>
-                  <div class="bar-track">
-                    <div class="bar-fill" [style.width.%]="entry.percent"></div>
+                <div class="bar-chart__row">
+                  <span class="bar-chart__label">{{ entry.label }}</span>
+                  <div class="bar-chart__track">
+                    <div class="bar-chart__fill" [style.width.%]="entry.percent"></div>
                   </div>
-                  <span class="bar-value">{{ entry.count }}</span>
+                  <span class="bar-chart__value">{{ entry.count }}</span>
                 </div>
               }
             </div>
           </div>
-          <div class="responses-section" data-testid="responses-section">
-            <h3 class="section-title">Recent Responses</h3>
+          <div class="dashboard__responses" data-testid="responses-section">
+            <h3 class="dashboard__section-title">Recent Responses</h3>
             <div class="response-list">
               @for (response of responses(); track response.id) {
-                <div class="response-item">
-                  <span class="response-value">{{ response.value }}</span>
-                  <span class="response-time">{{ response.submittedAt | date:'short' }}</span>
+                <div class="response-list__item">
+                  <span class="response-list__value">{{ response.value }}</span>
+                  <span class="response-list__time">{{ response.submittedAt | date:'short' }}</span>
                 </div>
               } @empty {
-                <p class="empty-text">No responses yet.</p>
+                <p class="dashboard__empty">No responses yet.</p>
               }
             </div>
           </div>
         </div>
       } @else {
-        <div class="empty-state" data-testid="empty-state">
+        <div class="dashboard__empty-state" data-testid="empty-state">
           <p>No active question. Activate a question from the Questions page to get started.</p>
         </div>
       }
@@ -92,21 +92,21 @@ import { Question, QuestionResponse, QuestionStatus } from 'domain';
       display: block;
     }
 
-    .page-header {
+    .dashboard__header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 24px;
     }
 
-    .page-title {
+    .dashboard__title {
       font-family: 'Inconsolata', monospace;
       font-size: 24px;
       font-weight: 600;
       margin: 0;
     }
 
-    .header-actions {
+    .dashboard__actions {
       display: flex;
       gap: 8px;
     }
@@ -128,12 +128,12 @@ import { Question, QuestionResponse, QuestionStatus } from 'domain';
       cursor: not-allowed;
     }
 
-    .btn-primary {
+    .btn--primary {
       background: #16160C;
       color: #ffffff;
     }
 
-    .btn-secondary {
+    .btn--secondary {
       background: #ffffff;
       color: #16160C;
       border: 1px solid #16160C1A;
@@ -143,7 +143,7 @@ import { Question, QuestionResponse, QuestionStatus } from 'domain';
       opacity: 0.85;
     }
 
-    .active-question-card {
+    .dashboard__question-card {
       background: #ffffff;
       border-radius: 12px;
       padding: 24px;
@@ -151,7 +151,7 @@ import { Question, QuestionResponse, QuestionStatus } from 'domain';
       margin-bottom: 24px;
     }
 
-    .card-header {
+    .dashboard__card-header {
       display: flex;
       align-items: center;
       gap: 12px;
@@ -166,51 +166,51 @@ import { Question, QuestionResponse, QuestionStatus } from 'domain';
       font-weight: 600;
     }
 
-    .badge-active {
+    .badge--active {
       background: #4A7C59;
       color: #ffffff;
     }
 
-    .question-type {
+    .dashboard__question-type {
       font-family: 'DM Sans', sans-serif;
       font-size: 12px;
       color: #7A7A7A;
     }
 
-    .question-title {
+    .dashboard__question-title {
       font-family: 'Inconsolata', monospace;
       font-size: 20px;
       font-weight: 600;
       margin: 0 0 16px;
     }
 
-    .card-footer {
+    .dashboard__card-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .response-count {
+    .dashboard__response-count {
       font-family: 'DM Sans', sans-serif;
       font-size: 14px;
       color: #7A7A7A;
     }
 
-    .dashboard-grid {
+    .dashboard__grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 24px;
     }
 
-    .chart-section,
-    .responses-section {
+    .dashboard__chart,
+    .dashboard__responses {
       background: #ffffff;
       border-radius: 12px;
       padding: 24px;
       border: 1px solid #16160C1A;
     }
 
-    .section-title {
+    .dashboard__section-title {
       font-family: 'Inconsolata', monospace;
       font-size: 16px;
       font-weight: 600;
@@ -223,13 +223,13 @@ import { Question, QuestionResponse, QuestionStatus } from 'domain';
       gap: 12px;
     }
 
-    .bar-row {
+    .bar-chart__row {
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    .bar-label {
+    .bar-chart__label {
       width: 100px;
       font-family: 'DM Sans', sans-serif;
       font-size: 13px;
@@ -239,7 +239,7 @@ import { Question, QuestionResponse, QuestionStatus } from 'domain';
       text-overflow: ellipsis;
     }
 
-    .bar-track {
+    .bar-chart__track {
       flex: 1;
       height: 24px;
       background: #F5F0F0;
@@ -247,14 +247,14 @@ import { Question, QuestionResponse, QuestionStatus } from 'domain';
       overflow: hidden;
     }
 
-    .bar-fill {
+    .bar-chart__fill {
       height: 100%;
       background: #C4956A;
       border-radius: 4px;
       transition: width 0.3s ease;
     }
 
-    .bar-value {
+    .bar-chart__value {
       width: 32px;
       text-align: right;
       font-family: 'Inconsolata', monospace;
@@ -270,7 +270,7 @@ import { Question, QuestionResponse, QuestionStatus } from 'domain';
       overflow-y: auto;
     }
 
-    .response-item {
+    .response-list__item {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -279,26 +279,26 @@ import { Question, QuestionResponse, QuestionStatus } from 'domain';
       border-radius: 6px;
     }
 
-    .response-value {
+    .response-list__value {
       font-family: 'DM Sans', sans-serif;
       font-size: 14px;
       color: #16160C;
     }
 
-    .response-time {
+    .response-list__time {
       font-family: 'DM Sans', sans-serif;
       font-size: 12px;
       color: #7A7A7A;
       white-space: nowrap;
     }
 
-    .empty-text {
+    .dashboard__empty {
       font-family: 'DM Sans', sans-serif;
       font-size: 14px;
       color: #7A7A7A;
     }
 
-    .empty-state {
+    .dashboard__empty-state {
       background: #ffffff;
       border-radius: 12px;
       padding: 48px;
