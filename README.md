@@ -4,6 +4,13 @@ ReflectQ is a QR-driven audience feedback platform for live sessions. Presenters
 
 > Current state: the .NET backend is the most complete part of the repo. The Angular workspace currently contains reusable libraries, not a runnable browser app.
 
+## Quick Links
+
+- [L1 requirements](docs/specs/L1.md)
+- [L2 requirements](docs/specs/L2.md)
+- [Contributing guide](CONTRIBUTING.md)
+- [MIT License](LICENSE)
+
 ## What Is In This Repository
 
 - `ReflectQ.Api`: ASP.NET Core API with JWT auth, role-based authorization, SignalR, and Entity Framework Core.
@@ -156,12 +163,6 @@ Verified working commands in the current repository state:
 Current known issue:
 
 - `dotnet test ReflectQ.slnx` currently fails because [`tests/ReflectQ.Api.Tests/UsersControllerTests.cs`](tests/ReflectQ.Api.Tests/UsersControllerTests.cs) references `WebApplicationFactory<>` without the required namespace import.
-
-## Documentation
-
-- [L1 requirements](docs/specs/L1.md)
-- [L2 requirements](docs/specs/L2.md)
-- [Contributing guide](CONTRIBUTING.md)
 
 ## Near-Term Gaps
 

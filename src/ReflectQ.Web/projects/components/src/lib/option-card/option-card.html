@@ -1,0 +1,9 @@
+<button
+  class="option-card"
+  [class.selected]="selected"
+  (click)="selectedChange.emit()"
+  type="button"
+>
+  <span class="radio"></span>
+  <span class="text">{{ text }}</span>
+</button>

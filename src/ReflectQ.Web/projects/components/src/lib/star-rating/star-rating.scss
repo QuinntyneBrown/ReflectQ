@@ -1,0 +1,33 @@
+:host {
+  display: block;
+}
+
+.star-rating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.star {
+  cursor: pointer;
+  fill: #B0B0B0;
+}
+
+.star.filled {
+  fill: #16160C;
+}
+
+.label {
+  margin-top: 12px;
+  font-family: 'Inconsolata', monospace;
+  font-size: 18px;
+  font-weight: 500;
+  color: #7A7A7A;
+  text-align: center;
+}
