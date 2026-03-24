@@ -1,0 +1,52 @@
+<div class="respondent" data-testid="respondent-page">
+  @if (question(); as q) {
+    <div class="respondent__content">
+      <div class="respondent__top">
+        <lib-app-logo size="sm" theme="dark" />
+        <lib-question-text [text]="q.title" />
+      </div>
+
+      <div class="respondent__input">
+        @switch (q.type) {
+          @case ('MultipleChoice') {
+            <div class="respondent__options" data-testid="options-list">
+              @for (option of q.options; track option.id) {
+                <lib-option-card
+                  [text]="option.text"
+                  [selected]="selectedValue() === option.text"
+                  (selectedChange)="selectedValue.set(option.text)"
+                />
+              }
+            </div>
+          }
+          @case ('Rating') {
+            <lib-star-rating
+              [value]="ratingValue()"
+              (ratingChange)="onRatingChange($event)"
+              data-testid="star-rating"
+            />
+          }
+          @case ('FreeText') {
+            <lib-text-area-field
+              [value]="textValue()"
+              (valueChange)="textValue.set($event)"
+              data-testid="text-area"
+            />
+          }
+        }
+      </div>
+
+      <div class="respondent__bottom">
+        <lib-submit-button
+          [disabled]="!canSubmit()"
+          (submitClick)="onSubmit()"
+          data-testid="submit-button"
+        />
+      </div>
+    </div>
+  } @else {
+    <div class="respondent--loading">
+      <p>Loading...</p>
+    </div>
+  }
+</div>

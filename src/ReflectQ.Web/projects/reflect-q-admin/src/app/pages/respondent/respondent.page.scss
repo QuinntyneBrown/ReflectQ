@@ -1,0 +1,50 @@
+:host {
+  display: block;
+  height: 100vh;
+}
+
+.respondent {
+  height: 100%;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+}
+
+.respondent__content {
+  width: 100%;
+  max-width: 480px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.respondent__top {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.respondent__input {
+  flex: 1;
+}
+
+.respondent__options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.respondent__bottom {
+  padding-top: 24px;
+}
+
+.respondent--loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-family: 'DM Sans', sans-serif;
+  color: #7A7A7A;
+}

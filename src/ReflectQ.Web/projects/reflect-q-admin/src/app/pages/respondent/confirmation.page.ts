@@ -4,24 +4,7 @@ import { ConfirmationMessage } from 'components';
 @Component({
   selector: 'app-confirmation-page',
   imports: [ConfirmationMessage],
-  template: `
-    <div class="confirmation" data-testid="confirmation-page">
-      <lib-confirmation-message />
-    </div>
-  `,
-  styles: `
-    :host {
-      display: block;
-      height: 100vh;
-    }
-
-    .confirmation {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #ffffff;
-    }
-  `,
+  templateUrl: './confirmation.page.html',
+  styleUrl: './confirmation.page.scss',
 })
 export class ConfirmationPage {}

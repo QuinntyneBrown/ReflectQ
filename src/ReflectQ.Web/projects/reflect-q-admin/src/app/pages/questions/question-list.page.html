@@ -1,0 +1,101 @@
+<div class="question-list" data-testid="question-list-page">
+  <header class="question-list__header">
+    <h1 class="question-list__title">Questions</h1>
+    <button class="btn btn--primary" (click)="onNewQuestion()" data-testid="new-question-button">
+      New Question
+    </button>
+  </header>
+
+  <div class="question-list__filters">
+    <input
+      type="text"
+      class="question-list__search"
+      placeholder="Search questions..."
+      [ngModel]="search()"
+      (ngModelChange)="onSearchChange($event)"
+      data-testid="search-input"
+    />
+    <select
+      class="question-list__filter"
+      [ngModel]="statusFilter()"
+      (ngModelChange)="onStatusFilterChange($event)"
+      data-testid="status-filter"
+      aria-label="Filter by status"
+    >
+      <option value="">All Statuses</option>
+      <option value="Draft">Draft</option>
+      <option value="Active">Active</option>
+      <option value="Archived">Archived</option>
+    </select>
+    <label class="question-list__toggle">
+      <input
+        type="checkbox"
+        [ngModel]="showArchived()"
+        (ngModelChange)="onShowArchivedChange($event)"
+        data-testid="show-archived-toggle"
+      />
+      <span>Show Archived</span>
+    </label>
+  </div>
+
+  <div class="question-list__table-wrap">
+    <table class="data-table" data-testid="questions-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Created</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (question of questions(); track question.id) {
+          <tr data-testid="question-row">
+            <td>{{ question.title }}</td>
+            <td>{{ question.type }}</td>
+            <td>
+              <span class="badge" [class]="'badge--' + question.status.toLowerCase()">
+                {{ question.status }}
+              </span>
+            </td>
+            <td>{{ question.createdAt | date:'mediumDate' }}</td>
+            <td>
+              <div class="data-table__actions">
+                @if (question.status !== 'Active') {
+                  <button
+                    class="icon-btn"
+                    title="Activate"
+                    (click)="onActivate(question)"
+                    data-testid="activate-button"
+                    aria-label="Activate question"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                  </button>
+                }
+                <button
+                  class="icon-btn"
+                  title="Edit"
+                  (click)="onEdit(question)"
+                  data-testid="edit-button"
+                  aria-label="Edit question"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                  </svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="5" class="data-table__empty">No questions found.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

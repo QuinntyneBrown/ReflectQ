@@ -1,0 +1,77 @@
+<div class="dashboard" data-testid="dashboard-page">
+  <header class="dashboard__header">
+    <h1 class="dashboard__title">Live Dashboard</h1>
+    <div class="dashboard__actions">
+      <button
+        class="btn btn--secondary"
+        (click)="onExportCsv()"
+        [disabled]="!activeQuestion()"
+        data-testid="export-csv-button"
+      >
+        Export CSV
+      </button>
+      <button
+        class="btn btn--secondary"
+        (click)="onReset()"
+        [disabled]="!activeQuestion()"
+        data-testid="reset-button"
+      >
+        Reset
+      </button>
+    </div>
+  </header>
+
+  @if (activeQuestion(); as question) {
+    <div class="dashboard__question-card" data-testid="active-question-card">
+      <div class="dashboard__card-header">
+        <span class="badge badge--active">Active</span>
+        <span class="dashboard__question-type">{{ question.type }}</span>
+      </div>
+      <h2 class="dashboard__question-title">{{ question.title }}</h2>
+      <div class="dashboard__card-footer">
+        <span class="dashboard__response-count">{{ responseCount() }} responses</span>
+        <button
+          class="btn btn--primary"
+          (click)="onPresenterView(question.id)"
+          data-testid="presenter-view-button"
+        >
+          Presenter View
+        </button>
+      </div>
+    </div>
+
+    <div class="dashboard__grid">
+      <div class="dashboard__chart" data-testid="chart-section">
+        <h3 class="dashboard__section-title">Response Distribution</h3>
+        <div class="bar-chart">
+          @for (entry of chartData(); track entry.label) {
+            <div class="bar-chart__row">
+              <span class="bar-chart__label">{{ entry.label }}</span>
+              <div class="bar-chart__track">
+                <div class="bar-chart__fill" [style.width.%]="entry.percent"></div>
+              </div>
+              <span class="bar-chart__value">{{ entry.count }}</span>
+            </div>
+          }
+        </div>
+      </div>
+      <div class="dashboard__responses" data-testid="responses-section">
+        <h3 class="dashboard__section-title">Recent Responses</h3>
+        <div class="response-list">
+          @for (response of responses(); track response.id) {
+            <div class="response-list__item">
+              <span class="response-list__value">{{ response.value }}</span>
+              <span class="response-list__time">{{ response.submittedAt | date:'short' }}</span>
+            </div>
+          } @empty {
+            <p class="dashboard__empty">No responses yet.</p>
+          }
+        </div>
+      </div>
+    </div>
+  } @else {
+    <div class="dashboard__empty-state" data-testid="empty-state">
+      <p>No active question. Activate a question from the Questions page to get started.</p>
+    </div>
+  }
+</div>
