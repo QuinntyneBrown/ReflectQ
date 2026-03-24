@@ -1,43 +1,42 @@
 # ReflectQ
 
-ReflectQ is a QR-driven audience feedback platform for live sessions. Presenters display a question and QR code, attendees respond on their phones, and admins monitor incoming answers in real time.
+ReflectQ is a real-time audience feedback platform for live sessions. Presenters display a question and QR code, attendees answer on their phones, and admins monitor responses live.
 
-> Current state: the .NET backend is the most complete part of the repo. The Angular workspace currently contains reusable libraries, not a runnable browser app.
+## At A Glance
 
-## Quick Links
+- Backend: ASP.NET Core Web API with JWT auth, role-based authorization, SignalR, and EF Core.
+- Frontend: Angular 21 workspace with reusable `api`, `domain`, and `components` libraries.
+- Persistence: SQL Server via `ReflectQDbContext`.
+- Specs: [L1 requirements](docs/specs/L1.md) and [L2 requirements](docs/specs/L2.md).
+- Project docs: [CONTRIBUTING.md](CONTRIBUTING.md) and [MIT License](LICENSE).
 
-- [L1 requirements](docs/specs/L1.md)
-- [L2 requirements](docs/specs/L2.md)
-- [Contributing guide](CONTRIBUTING.md)
-- [MIT License](LICENSE)
+## Current Status
 
-## What Is In This Repository
+| Area | Status |
+| --- | --- |
+| API | Most complete part of the repository. Question, response, and user management endpoints are implemented. |
+| Real-time updates | SignalR hub at `/hubs/responses` broadcasts new responses and response counts. |
+| Frontend | Angular workspace exists, but it is not a runnable app yet. It currently contains libraries only. |
+| Database | SQL Server is configured, but EF Core migrations are not checked into the repository yet. |
+| Tests | Frontend library tests run. The backend test suite is currently blocked by an existing compile issue. |
 
-- `ReflectQ.Api`: ASP.NET Core API with JWT auth, role-based authorization, SignalR, and Entity Framework Core.
-- `ReflectQ.Domain`: shared domain entities and enums.
-- `ReflectQ.Infrastructure`: EF Core `DbContext` and SQL Server persistence configuration.
-- `ReflectQ.Web`: Angular 21 workspace with three libraries: `api`, `domain`, and `components`.
-- `ReflectQ.Api.Tests`: xUnit integration tests for questions, responses, and user-management endpoints.
-- `docs/specs`: L1 and L2 product requirements.
+## Core Capabilities
 
-## Implemented Backend Capabilities
+- Create, list, search, sort, update, activate, and archive questions.
+- Submit responses publicly through `POST /api/responses`.
+- View, clear, and export question responses as CSV.
+- Invite, update, list, and deactivate admin users.
+- Enforce `AdminOrAbove` and `SuperAdmin` policies with JWT bearer tokens.
 
-- Question management API: create, list, search, sort, update, activate, and archive questions.
-- Response collection API: public response submission endpoint plus admin-only response listing, clearing, and CSV export.
-- Real-time updates: SignalR hub at `/hubs/responses` broadcasts new responses and response counts.
-- User management API: list, invite, update, and deactivate admin users.
-- Authentication and authorization: JWT bearer auth with `AdminOrAbove` and `SuperAdmin` policies.
-- Persistence: EF Core is configured for SQL Server and models `Question`, `QuestionOption`, `Response`, and `User`.
-
-## Tech Stack
+## Stack
 
 - .NET 11 preview
 - ASP.NET Core Web API
 - Entity Framework Core + SQL Server
 - SignalR
-- xUnit
 - Angular 21
 - TypeScript + Vitest
+- xUnit
 
 ## Repository Layout
 
@@ -54,7 +53,7 @@ ReflectQ is a QR-driven audience feedback platform for live sessions. Presenters
    `- ReflectQ.Api.Tests/
 ```
 
-## Getting Started
+## Quick Start
 
 ### Prerequisites
 
@@ -70,9 +69,9 @@ ReflectQ is a QR-driven audience feedback platform for live sessions. Presenters
    dotnet restore ReflectQ.slnx
    ```
 
-2. Review API configuration in [`src/ReflectQ.Api/appsettings.Development.json`](src/ReflectQ.Api/appsettings.Development.json).
+2. Review development settings in [`src/ReflectQ.Api/appsettings.Development.json`](src/ReflectQ.Api/appsettings.Development.json).
 
-   The repo currently defaults to:
+   Current defaults:
 
    - `ConnectionStrings:DefaultConnection = Server=(localdb)\mssqllocaldb;Database=ReflectQ_Dev;Trusted_Connection=True;MultipleActiveResultSets=true`
    - `Jwt:Issuer = ReflectQ`
@@ -84,7 +83,7 @@ ReflectQ is a QR-driven audience feedback platform for live sessions. Presenters
    dotnet run --project src/ReflectQ.Api/ReflectQ.Api.csproj
    ```
 
-4. Use the development launch profile URLs:
+4. Use the local URLs from the launch profile:
 
    - `http://localhost:5087`
    - `https://localhost:7250`
@@ -92,12 +91,12 @@ ReflectQ is a QR-driven audience feedback platform for live sessions. Presenters
 Notes:
 
 - OpenAPI is enabled in Development.
-- Configuration can also be supplied via environment variables such as `ConnectionStrings__DefaultConnection` and `Jwt__Key`.
-- No EF Core migrations are currently checked into the repository, so you will need to create/apply schema changes before using a real SQL database.
+- You can override configuration with environment variables such as `ConnectionStrings__DefaultConnection` and `Jwt__Key`.
+- Because migrations are not committed yet, a real SQL-backed environment still needs schema setup work.
 
 ### Work With The Angular Workspace
 
-The frontend workspace is currently a multi-project Angular library workspace, not a runnable SPA.
+The frontend is currently a multi-project Angular library workspace, not a runnable SPA.
 
 Install dependencies:
 
@@ -106,7 +105,7 @@ cd src/ReflectQ.Web
 npm ci
 ```
 
-Build a specific library:
+Build individual libraries:
 
 ```powershell
 npx ng build api
@@ -122,10 +121,10 @@ npm test -- --watch=false
 
 Notes:
 
-- `npm run build` fails by default because Angular needs a specific project name in this multi-project workspace.
-- `npm start` / `ng serve` is not useful yet because there is no application project defined in `angular.json`.
+- `npm run build` fails by default because Angular needs an explicit project name in this workspace.
+- `npm start` / `ng serve` is not useful yet because `angular.json` does not define an application project.
 
-## API Overview
+## API Access Model
 
 ### Public
 
@@ -150,9 +149,9 @@ Notes:
 - `PUT /api/users/{id}`
 - `PUT /api/users/{id}/deactivate`
 
-## Testing
+## Validation
 
-Verified working commands in the current repository state:
+Commands verified against the current repository state:
 
 - `dotnet build src/ReflectQ.Api/ReflectQ.Api.csproj`
 - `npm test -- --watch=false` from `src/ReflectQ.Web`
@@ -160,19 +159,19 @@ Verified working commands in the current repository state:
 - `npx ng build domain`
 - `npx ng build components`
 
-Current known issue:
+Known issue:
 
 - `dotnet test ReflectQ.slnx` currently fails because [`tests/ReflectQ.Api.Tests/UsersControllerTests.cs`](tests/ReflectQ.Api.Tests/UsersControllerTests.cs) references `WebApplicationFactory<>` without the required namespace import.
 
 ## Near-Term Gaps
 
-- The Angular admin, presenter, and respondent applications have not been built yet.
-- The Angular workspace still contains scaffold-level library components.
+- The presenter, respondent, and admin frontend applications have not been built yet.
+- The Angular libraries are still at scaffold level.
 - EF Core migrations are not committed yet.
 
 ## Contributing
 
-Contributions are welcome. For local setup, validation commands, and pull request expectations, see [CONTRIBUTING.md](CONTRIBUTING.md).
+Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, validation, and pull request expectations.
 
 ## License
 
